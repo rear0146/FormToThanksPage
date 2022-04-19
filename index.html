@@ -4,12 +4,20 @@
     <title>Redirect after submitting Google Form</title>
 </head>
 <body>
-    
-    <script type="text/javascript">var submitted=false;</script>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){window.location='thanks.html}"></iframe>
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSfWHVzI1z8nT9O5bnp8WBMc4WppxbglqAAV_zsJrQGJy_BjKg/viewform?embedded=true" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true"
-      width="640px" hight="640px">
-    
+    <iframe id="my-google-form"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfWHVzI1z8nT9O5bnp8WBMc4WppxbglqAAV_zsJrQGJy_BjKg/viewform?embedded=true"
+        frameborder="0" width="100%" height="100%">Loading…</iframe>
  
+    <script type="text/javascript">
+        var load = 0;
+        document.getElementById('my-google-form').onload = function () {
+            // Execute on every reload on iFrame
+            load++;
+            if (load > 1) {
+                // Second reload is a submit
+                document.location = "thanks.html";
+            }
+        }
+    </script>
 </body>
 </html>
