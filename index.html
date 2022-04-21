@@ -2,20 +2,19 @@
 <html>
 <head>
     <title>Redirect after submitting Google Form</title>
-    <script type="text/javascript">
-        window.onload = function() {
-           try {
-               var doc = document.getElementsByTagName("iframe")[0].contentWindow.document;
-           } catch(e) {
-               alert(e);
-           }
-           alert(doc.body.innerHTML);
-       }
-   </script>
 </head>
 <body>
     <iframe id="my-google-form"
         src="https://docs.google.com/forms/d/e/1FAIpQLSfWHVzI1z8nT9O5bnp8WBMc4WppxbglqAAV_zsJrQGJy_BjKg/viewform?embedded=true"
         frameborder="0" width="100%" height="640">Loading…</iframe>
+
+     <script type="text/javascript">
+         var gf = document.getElementById('my-google-form');
+         gf.onload = function () {
+            var iframeDocument = gf.contentDocument || gf.contentWindow.document;
+            var pElem = iframeDocument.getElementsByTagName('body')[0];
+            console.log("pElem="+pElem);
+        }    
+    </script>
 </body>
 </html>
